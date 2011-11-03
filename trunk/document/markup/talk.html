@@ -3,6 +3,46 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>chatroom</title>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+	// List Tab Navigation
+	var tab_list = $('div.tab.list');
+	var tab_list_i = tab_list.find('>ul>li');
+	tab_list.removeClass('jx');
+	if($(document).width()<=640){
+		tab_list.addClass('jx');
+	}
+	$(window).resize(function(){
+		if($(document).width()<=640){
+		tab_list.addClass('jx');
+		tab_list.css('height','auto');
+		} else {
+		tab_list.removeClass('jx');
+		tab_list.css('height', tab_list.find('>ul>li.active>ul').height()+40);
+		}
+	});
+	tab_list_i.find('>ul').hide();
+	tab_list.find('>ul>li[class=active]').find('>ul').show();
+	if (!tab_list.hasClass('jx')){
+		tab_list.css('height', tab_list.find('>ul>li.active>ul').height()+40);
+	} else {
+		tab_list.css('height','auto');
+	}
+	function listTabMenuToggle(event){
+		if (!tab_list.hasClass('jx')){
+			var t = $(this);
+			tab_list_i.find('>ul').hide();
+			t.next('ul').show();
+			tab_list_i.removeClass('active');
+			t.parent('li').addClass('active');
+			tab_list.css('height', t.next('ul').height()+40);
+			return false;
+		}
+	}
+	tab_list_i.find('>a[href=#]').click(listTabMenuToggle).focus(listTabMenuToggle);
+});
+</script>
 <style type="text/css">
 /* Reset */
 body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
@@ -16,7 +56,8 @@ a:hover,a:active,a:focus{text-decoration:underline}
 .blind{visibility:hidden;overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:0;line-height:0}
 
 /* Layout */
-.wrap{margin:20px auto;padding:30px;width:900px;border:2px solid #ccc;box-shadow:5px 5px 2px #888}
+.wrap{width:960px;margin:0 auto}
+.container{margin:0 auto;padding:30px;width:898px;border:1px solid #ccc;box-shadow:5px 5px 2px #888;border-top:none}
 .header{overflow:hidden;position:relative;width:890px;padding:5px;height:50px;border:1px solid #ccc}
 .header .thumb_pic{float:left}
 .header .profile{float:left;margin-left:20px}
@@ -32,50 +73,84 @@ a:hover,a:active,a:focus{text-decoration:underline}
 .footer .plugin li a{display:block;padding:0 8px;width:auto;height:20px;line-height:20px;border:1px solid #ccc}
 .footer .txt{width:840px;min-height:200px;resize:none;padding:20px;outline:none; overflow:hidden}
 .footer .sbm{position:absolute;bottom:20px;right:30px;width:50px;height:20px}
+.tab.list{margin:1em auto 0;width:960px}
+.tab.list ul{position:relative;margin:0;padding:0;list-style:none;border-bottom:1px solid #ccc;zoom:1;height:39px}
+.tab.list ul:after{content:"";display:block;clear:both}
+.tab.list li{float:left;}
+.tab.list li a{position:relative;float:left;text-decoration:none;border:1px solid #eee;border-bottom-color:#ccc;background:#fafafa;color:#666;height:39px}
+.tab.list li a span{display:inline-block;padding:6px 25px 6px 25px;letter-spacing:-1px;cursor:pointer;line-height:27px;}
+.tab.list li ul{width:100%;position:absolute;top:40px;left:0;list-style:none;border:0;margin:0;padding:0;zoom:1}
+.tab.list li ul:after{content:"";display:block;clear:both}
+.tab.list li li{float:none;position:relative;margin:0 0 8px 0;color:#999}
+.tab.list li li a{float:none;padding:0;margin:0;border:0 !important;color:#666 !important;font-weight:normal;background:transparent;letter-spacing:normal}
+.tab.list li li a:hover,
+.tab.list li li a:active,
+.tab.list li li a:focus{color:#000 !important;text-decoration:underline}
+.tab.list li li .side{position:absolute;top:0;right:0;color:#767676}
+.tab.list li li.more{position:absolute;top:-30px;right:0;border:0 !important;background:transparent}
+.tab.list li.active a{border:1px solid #ccc;border-bottom:1px solid #fff;margin-top:-1px;background:transparent;color:#333}
+.tab.list li.active a span{padding-top:7px;font-weight:bold}
+.tab.list.jx{height:auto}
+.tab.list.jx ul{border:0}
+.tab.list.jx li{float:none;position:relative}
+.tab.list.jx li a{float:none;display:block;font-weight:bold;color:#333;border:1px solid #eee !important;border-bottom-color:#ccc !important;background:#fafafa !important}
+.tab.list.jx li ul{position:static;display:block !important;left:0;top:0;padding:5px 0}
+.tab.list.jx li li a{display:inline;border:0 !important;background:none !important;font-weight:normal}
+.tab.list.jx li li.more{top:7px;right:15px}
 </style>
 </head>
 
 <body>
+
 <div class="wrap">
-	<div class="header">
-		<div class="thumb_pic"><a href="#" target="_blank"><img src="img/@tmp_heaer.jpg" width="48" height="48" alt="Robert Scoble" /></a></div>
-		<div class="profile">
-			<dl>
-			<dt class="username"><a href="#" target="_blank">Robbert Scoble</a></dt>
-			<dd><p class="introduction">I'd like to help you,I'd like to climbing</p></dd>
-			</dl>
-			<a href="#" target="_blank" class="profile_link">个人资料</a>
-			<a href="#" target="_blank" class="blog">blog</a>
-		</div>
-	</div>
-	<div class="content">
+	<div class="tab list jx">
 		<ul>
-		<li>
-			<dl>
-			<dt class="username">Robbert Scoble</dt>
-			<dd class="time">2010-10-30 19:30</dd>
-			<dd>1、XXXX；2、XXXXXXXXXXXXX；3、XXXXX；4、XXXXX；5、XXXX；6、XXXX；7、XXXX</dd>
-			</dl>
-		</li>
-		<li>
-			<dl>
-			<dt class="username">Robbert Scoble</dt>
-			<dd class="time">2010-10-30 19:30</dd>
-			<dd>1、XXXX；2、XXXXXXXXXXXXX；3、XXXXX；4、XXXXX；5、XXXX；6、XXXX；7、XXXX</dd>
-			</dl>
-		</li>
+		<li class="active"><a href="#" target="_blank"><span>发言</span></a></li>
+		<li><a href="#" target="_blank"><span>在线咨询</span></a></li>
+		<li><a href="#" target="_blank"><span>帮助手册</span></a></li>
 		</ul>
 	</div>
-	<div class="footer">
-		<ul class="plugin">
-		<li><a href="#" class="face">表情</a></li>
-		<li><a href="#" class="img">插入图片</a></li>
-		<li><a href="#" class="video">插入视频</a></li>
-		</ul>
-		<form action="#" method="post">
-		<textarea class="txt"></textarea>
-		<input type="submit" value="发送" class="sbm" />
-		</form>
+	<div class="container">
+		<div class="header">
+			<div class="thumb_pic"><a href="#" target="_blank"><img src="img/@tmp_heaer.jpg" width="48" height="48" alt="Robert Scoble" /></a></div>
+			<div class="profile">
+				<dl>
+				<dt class="username"><a href="#" target="_blank">Robbert Scoble</a></dt>
+				<dd><p class="introduction">I'd like to help you,I'd like to climbing</p></dd>
+				</dl>
+				<a href="#" target="_blank" class="profile_link">个人资料</a>
+				<a href="#" target="_blank" class="blog">blog</a>
+			</div>
+		</div>
+		<div class="content">
+			<ul>
+			<li>
+				<dl>
+				<dt class="username">Robbert Scoble</dt>
+				<dd class="time">2010-10-30 19:30</dd>
+				<dd>1、XXXX；2、XXXXXXXXXXXXX；3、XXXXX；4、XXXXX；5、XXXX；6、XXXX；7、XXXX</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+				<dt class="username">Robbert Scoble</dt>
+				<dd class="time">2010-10-30 19:30</dd>
+				<dd>1、XXXX；2、XXXXXXXXXXXXX；3、XXXXX；4、XXXXX；5、XXXX；6、XXXX；7、XXXX</dd>
+				</dl>
+			</li>
+			</ul>
+		</div>
+		<div class="footer">
+			<ul class="plugin">
+			<li><a href="#" class="face">表情</a></li>
+			<li><a href="#" class="img">插入图片</a></li>
+			<li><a href="#" class="video">插入视频</a></li>
+			</ul>
+			<form action="#" method="post">
+			<textarea class="txt"></textarea>
+			<input type="submit" value="发送" class="sbm" />
+			</form>
+		</div>
 	</div>
 </div>
 </body>
