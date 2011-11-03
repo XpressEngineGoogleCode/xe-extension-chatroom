@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>chatroom</title>
+<style type="text/css">
+/* Reset */
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+body,input,textarea,select,button,table{font-family:Arial, Helvetica, sans-serif;font-size:12px}
+img,fieldset{border:0}
+img{vertical-align:top}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{text-decoration:none}
+a:hover,a:active,a:focus{text-decoration:underline}
+.blind{visibility:hidden;overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:0;line-height:0}
+
+/* Layout */
+.wrap{margin:20px auto;padding:30px;width:900px;border:2px solid #ccc;box-shadow:5px 5px 2px #888}
+.header{overflow:hidden;position:relative;width:890px;padding:5px;height:50px;border:1px solid #ccc}
+.header .thumb_pic{float:left}
+.header .profile{float:left;margin-left:20px}
+.header .profile_link{position:absolute;bottom:5px;right:100px}
+.header .blog{position:absolute;bottom:5px;right:25px}
+.content{padding:10px;width:880px;border:1px solid #ccc}
+.content li{position:relative;margin:20px}
+.content .username{margin-bottom:15px;color:red}
+.content .time{position:absolute;top:0;left:150px}
+.footer{position:relative;width:880px;padding:10px;border:1px solid #ccc}
+.footer .plugin{overflow:hidden}
+.footer .plugin li{float:left;margin-right:15px}
+.footer .plugin li a{display:block;padding:0 8px;width:auto;height:20px;line-height:20px;border:1px solid #ccc}
+.footer .txt{width:840px;min-height:200px;resize:none;padding:20px;outline:none; overflow:hidden}
+.footer .sbm{position:absolute;bottom:20px;right:30px;width:50px;height:20px}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+	<div class="header">
+		<div class="thumb_pic"><a href="#" target="_blank"><img src="img/@tmp_heaer.jpg" width="48" height="48" alt="Robert Scoble" /></a></div>
+		<div class="profile">
+			<dl>
+			<dt class="username"><a href="#" target="_blank">Robbert Scoble</a></dt>
+			<dd><p class="introduction">I'd like to help you,I'd like to climbing</p></dd>
+			</dl>
+			<a href="#" target="_blank" class="profile_link">个人资料</a>
+			<a href="#" target="_blank" class="blog">blog</a>
+		</div>
+	</div>
+	<div class="content">
+		<ul>
+		<li>
+			<dl>
+			<dt class="username">Robbert Scoble</dt>
+			<dd class="time">2010-10-30 19:30</dd>
+			<dd>1、XXXX；2、XXXXXXXXXXXXX；3、XXXXX；4、XXXXX；5、XXXX；6、XXXX；7、XXXX</dd>
+			</dl>
+		</li>
+		<li>
+			<dl>
+			<dt class="username">Robbert Scoble</dt>
+			<dd class="time">2010-10-30 19:30</dd>
+			<dd>1、XXXX；2、XXXXXXXXXXXXX；3、XXXXX；4、XXXXX；5、XXXX；6、XXXX；7、XXXX</dd>
+			</dl>
+		</li>
+		</ul>
+	</div>
+	<div class="footer">
+		<ul class="plugin">
+		<li><a href="#" class="face">表情</a></li>
+		<li><a href="#" class="img">插入图片</a></li>
+		<li><a href="#" class="video">插入视频</a></li>
+		</ul>
+		<form action="#" method="post">
+		<textarea class="txt"></textarea>
+		<input type="submit" value="发送" class="sbm" />
+		</form>
+	</div>
+</div>
+</body>
+</html>
