@@ -1,0 +1,1 @@
+xe-extension-chatroom
